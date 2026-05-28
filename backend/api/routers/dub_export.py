@@ -257,7 +257,7 @@ async def dub_download(
     if bg_idx is not None:
         for i, t in enumerate(tracks_to_process):
             out_label = f"[aout{i}]"
-            filter_parts.append(f"[{bg_idx}:a][{t['idx']}:a]amix=inputs=2:duration=longest:dropout_transition=2:weights=0.8 1.2{out_label}")
+            filter_parts.append(f"[{bg_idx}:a][{t['idx']}:a]amix=inputs=2:duration=longest:dropout_transition=2:normalize=0:weights=0.8 1.2,loudnorm=I=-11:LRA=11:TP=-0.5{out_label}")
             t["out_label"] = out_label
         for t in tracks_to_process:
             cmd += ["-map", t["out_label"]]
@@ -404,7 +404,7 @@ async def dub_preview_video(
         if bg_idx is not None:
             cmd += [
                 "-filter_complex",
-                f"[{bg_idx}:a][{track_idx}:a]amix=inputs=2:duration=longest:dropout_transition=2:weights=0.8 1.2[aout]",
+                f"[{bg_idx}:a][{track_idx}:a]amix=inputs=2:duration=longest:dropout_transition=2:normalize=0:weights=0.8 1.2,loudnorm=I=-11:LRA=11:TP=-0.5[aout]",
                 "-map", "[aout]",
             ]
         else:
@@ -493,7 +493,7 @@ async def dub_download_audio(job_id: str, lang: str = Query(None), preserve_bg: 
         final_audio_path = os.path.join(exports_dir, f"mixed_dub_{lang_label}_{stamp}.wav")
         cmd = [
             ffmpeg, "-i", bg_audio, "-i", wav_path,
-            "-filter_complex", "[0:a][1:a]amix=inputs=2:duration=longest:dropout_transition=2:weights=0.8 1.2[aout]",
+            "-filter_complex", "[0:a][1:a]amix=inputs=2:duration=longest:dropout_transition=2:normalize=0:weights=0.8 1.2,loudnorm=I=-11:LRA=11:TP=-0.5[aout]",
             "-map", "[aout]", "-c:a", "pcm_s16le", "-y", final_audio_path
         ]
         try:
@@ -668,7 +668,7 @@ async def dub_download_mp3(job_id: str, lang: str = Query(None), preserve_bg: bo
         mixed_path = os.path.join(exports_dir, f"mixed_mp3_{lang_label}_{stamp}.wav")
         cmd_mix = [
             ffmpeg, "-i", bg_audio, "-i", wav_path,
-            "-filter_complex", "[0:a][1:a]amix=inputs=2:duration=longest:dropout_transition=2:weights=0.8 1.2[aout]",
+            "-filter_complex", "[0:a][1:a]amix=inputs=2:duration=longest:dropout_transition=2:normalize=0:weights=0.8 1.2,loudnorm=I=-11:LRA=11:TP=-0.5[aout]",
             "-map", "[aout]", "-c:a", "pcm_s16le", "-y", mixed_path
         ]
         try:

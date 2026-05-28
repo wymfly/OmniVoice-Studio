@@ -800,6 +800,43 @@ async def dub_transcribe(job_id: str):
             s.setdefault("text_original", s.get("text", ""))
         job["full_transcript"] = " ".join(s["text"] for s in segments)
 
+        # Speaker-clone extraction (mirrors the SSE streaming transcribe path
+        # at lines 663-685). Without this block, ref_audio stays None in
+        # dub_generate and TTS falls back to the engine's default voice —
+        # i.e. the central "same speaker, new language" promise silently
+        # breaks. Patched 2026-05-22; see youtube/docs/omnivoice-architecture.md.
+        try:
+            from services.speaker_clone import extract_speaker_clones, auto_profile_id
+            vocals_for_clone = job.get("vocals_path") or asr_audio_target
+            if vocals_for_clone and os.path.exists(vocals_for_clone):
+                clones = extract_speaker_clones(
+                    vocals_for_clone, segments, os.path.dirname(vocals_for_clone),
+                )
+                if clones:
+                    job["speaker_clones"] = clones
+                    for s in segments:
+                        if s.get("profile_id"):
+                            continue
+                        spk = s.get("speaker_id") or "Speaker 1"
+                        if spk in clones:
+                            s["profile_id"] = auto_profile_id(spk)
+                    logger.info(
+                        "sync transcribe: extracted %d speaker clone(s): %s",
+                        len(clones), list(clones.keys()),
+                    )
+                else:
+                    logger.warning("sync transcribe: extract_speaker_clones returned empty")
+            else:
+                logger.warning(
+                    "sync transcribe: no vocals for clone (vocals_for_clone=%r)",
+                    vocals_for_clone,
+                )
+        except Exception as e:
+            logger.warning(
+                "sync transcribe: speaker_clone extraction failed: %s",
+                e, exc_info=True,
+            )
+
         if torch.backends.mps.is_available():
             torch.mps.empty_cache()
 
