@@ -1,9 +1,9 @@
 ---
-name: cluster-356
-description: "Skill for the Cluster_356 area of OmniVoice-Studio. 12 symbols across 2 files."
+name: cluster-359
+description: "Skill for the Cluster_359 area of OmniVoice-Studio. 12 symbols across 2 files."
 ---
 
-# Cluster_356
+# Cluster_359
 
 12 symbols | 2 files | Cohesion: 72%
 
@@ -11,7 +11,7 @@ description: "Skill for the Cluster_356 area of OmniVoice-Studio. 12 symbols acr
 
 - Working with code in `frontend/`
 - Understanding how find_bundled_sidecar, find_bundled_uv, find_bundled_ffmpeg work
-- Modifying cluster_356-related functionality
+- Modifying cluster_359-related functionality
 
 ## Key Files
 
@@ -53,10 +53,10 @@ Start here when exploring this area:
 |------|-------------|
 | Services | 5 calls |
 | Pages | 1 calls |
-| Cluster_359 | 1 calls |
+| Cluster_362 | 1 calls |
 
 ## How to Explore
 
 1. `gitnexus_context({name: "find_bundled_sidecar"})` — see callers and callees
-2. `gitnexus_query({query: "cluster_356"})` — find related execution flows
+2. `gitnexus_query({query: "cluster_359"})` — find related execution flows
 3. Read key files listed above for implementation details

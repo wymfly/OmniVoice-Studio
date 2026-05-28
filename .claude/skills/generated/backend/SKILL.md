@@ -77,7 +77,7 @@ Start here when exploring this area:
 | Area | Connections |
 |------|-------------|
 | Services | 3 calls |
-| Cluster_174 | 2 calls |
+| Cluster_177 | 2 calls |
 | Tests | 1 calls |
 | Routers | 1 calls |
 

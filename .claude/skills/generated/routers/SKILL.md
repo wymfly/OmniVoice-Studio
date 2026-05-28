@@ -1,11 +1,11 @@
 ---
 name: routers
-description: "Skill for the Routers area of OmniVoice-Studio. 165 symbols across 39 files."
+description: "Skill for the Routers area of OmniVoice-Studio. 170 symbols across 40 files."
 ---
 
 # Routers
 
-165 symbols | 39 files | Cohesion: 85%
+170 symbols | 40 files | Cohesion: 84%
 
 ## When to Use
 
@@ -21,7 +21,7 @@ description: "Skill for the Routers area of OmniVoice-Studio. 165 symbols across
 | `backend/api/routers/system.py` | clean_audio, _do_clean_audio, _has_hf_token, loaded_models, system_info (+6) |
 | `backend/api/routers/profiles.py` | list_profiles, create_profile, get_profile, update_profile, get_profile_usage (+5) |
 | `backend/api/routers/gallery.py` | list_voices, get_voice, delete_voice, download_youtube_clip, upload_voice_clip (+5) |
-| `backend/api/routers/dub_core.py` | list_dub_history, clear_dub_history, delete_single_dub_history, preview_upload, _transcribe_chunk (+3) |
+| `backend/api/routers/dub_core.py` | list_dub_history, clear_dub_history, delete_single_dub_history, preview_upload, _transcribe_chunk (+5) |
 | `backend/api/routers/glossary.py` | add_term, delete_term, clear_terms, _row_to_dict, list_terms (+2) |
 | `backend/api/routers/capture_ws.py` | _run, ws_transcribe, receive_audio, _safe_send, process_partials (+2) |
 | `backend/api/routers/settings.py` | _state_response, save_hf_token, clear_hf_token, get_hf_token_state, _torch_compile_state (+2) |
@@ -70,11 +70,11 @@ Start here when exploring this area:
 | `Enqueue_batch_job → _lazy_torch` | cross_community | 9 |
 | `Export_file → _load` | cross_community | 6 |
 | `Ws_tts → _lazy_torch` | cross_community | 6 |
+| `Dub_transcribe_stream → _lazy_torch` | cross_community | 6 |
 | `Dub_generate → _lazy_torch` | cross_community | 6 |
 | `Get_hf_token → Get_db` | cross_community | 6 |
 | `Set_hf_token → Get_db` | cross_community | 6 |
 | `Enqueue_batch_job → _safe_torchaudio_save` | cross_community | 6 |
-| `Create_transcription → Is_available` | cross_community | 5 |
 | `Create_transcription → Is_available` | cross_community | 5 |
 | `Create_transcription → Is_available` | cross_community | 5 |
 
@@ -82,9 +82,9 @@ Start here when exploring this area:
 
 | Area | Connections |
 |------|-------------|
-| Services | 14 calls |
+| Services | 18 calls |
 | Tests | 3 calls |
-| Cluster_174 | 1 calls |
+| Cluster_177 | 1 calls |
 
 ## How to Explore
 

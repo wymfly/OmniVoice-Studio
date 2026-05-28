@@ -1,11 +1,11 @@
 ---
 name: services
-description: "Skill for the Services area of OmniVoice-Studio. 352 symbols across 54 files."
+description: "Skill for the Services area of OmniVoice-Studio. 347 symbols across 54 files."
 ---
 
 # Services
 
-352 symbols | 54 files | Cohesion: 86%
+347 symbols | 54 files | Cohesion: 85%
 
 ## When to Use
 
@@ -18,10 +18,10 @@ description: "Skill for the Services area of OmniVoice-Studio. 352 symbols acros
 | File | Symbols |
 |------|---------|
 | `backend/services/tts_backend.py` | TTSBackend, OmniVoiceBackend, VoxCPM2Backend, MossTTSNanoBackend, KittenTTSBackend (+27) |
-| `backend/services/asr_backend.py` | unload, is_available, _ensure_pipe, transcribe, ASRBackend (+26) |
-| `backend/services/model_manager.py` | _classify_diarization_error, get_diarization_pipeline, get_model, _lazy_omnivoice, _set_loading (+15) |
+| `backend/services/asr_backend.py` | is_available, _ensure_pipe, transcribe, ASRBackend, WhisperXBackend (+25) |
+| `backend/services/model_manager.py` | get_model, _lazy_omnivoice, _set_loading, _env_flag, should_preload_tts_asr (+15) |
 | `tests/backend/services/test_audio_io.py` | test_safe_save_out_of_range_clamped, test_safe_save_non_contiguous_via_transpose, test_safe_save_rejects_empty_tensor, test_safe_save_rejects_non_tensor, test_safe_save_handles_1d_tensor (+13) |
-| `backend/services/segmentation.py` | assign_speakers_from_diarization, assign_speakers_heuristic, _word_count, _is_short, _is_ultra_short (+11) |
+| `backend/services/segmentation.py` | _word_count, _is_short, _is_ultra_short, _clean, _best_boundary (+10) |
 | `backend/services/subprocess_backend.py` | venv_python, sidecar_script, _spawn, shutdown, _force_kill (+9) |
 | `backend/services/dub_pipeline.py` | safe_job_dir, prep_event, find_cached_job, kill_job_procs, put_job (+8) |
 | `backend/services/watermark.py` | is_visible_audio_enabled, is_visible_video_enabled, generate_brand_tone, apply_audio_brand, get_ffmpeg_overlay_args (+6) |
