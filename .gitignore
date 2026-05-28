@@ -39,6 +39,10 @@ Thumbs.db
 #  Editor / tool caches
 # ─────────────────────────────────────────────────────────────────────────
 .claude/
+!.claude/
+!.claude/skills/
+!.claude/skills/**
+.gitnexus/
 /.cache*
 /.tmp/
 
